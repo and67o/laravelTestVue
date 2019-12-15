@@ -24,9 +24,10 @@
         "webpack": "^4.41.2"
     },
     "dependencies": {
+        "jquery": "^3.4.1",
         "node-sass": "^4.13.0",
-        "vue-router": "latest",
         "vue": "latest",
-        "vue-axios": "latest"
+        "vue-axios": "latest",
+        "vue-router": "latest"
     }
 }
