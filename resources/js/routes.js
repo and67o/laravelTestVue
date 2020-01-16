@@ -1,6 +1,7 @@
 import Home from './components/Home.vue';
 import Register from './components/Register.vue';
 import Login from './components/Login.vue';
+import Post from './components/Post';
 
 const routes = [
     {
@@ -17,6 +18,11 @@ const routes = [
         path: '/login',
         name: 'login',
         component: Login,
+    },
+    {
+        path: '/show/:id',
+        name: 'post',
+        component: Post,
     },
 ];
 
