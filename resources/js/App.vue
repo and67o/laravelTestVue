@@ -1,14 +1,14 @@
 <template>
-    <div class="panel panel-default">
+    <div>
         <Navbar/>
-        <div class="panel-body">
+        <div class="container">
             <router-view/>
         </div>
     </div>
 </template>
 
 <script>
-    import Navbar from './components/base/navbar/index';
+    import Navbar from './components/base/navbar/';
 
     export default {
         components: {
@@ -21,3 +21,12 @@
         methods: {}
     }
 </script>
+<style lang="css">
+    body {
+        background: #fff;
+    }
+
+    nav {
+        margin-bottom: 15px;
+    }
+</style>

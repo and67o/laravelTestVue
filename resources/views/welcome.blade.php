@@ -9,9 +9,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
     </head>
     <body>
-    <div class="container">
-        <div id="app"></div>
-    </div>
+    <div id="app"></div>
     <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>

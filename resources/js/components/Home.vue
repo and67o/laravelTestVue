@@ -3,28 +3,28 @@
         <section v-if="errors">
             <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
         </section>
-        <div class="row">
-            <div v-for="post in posts" class="col-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h2>{{ post.short_title }}</h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-author">Автор: {{ post.name }}</div>
-                        <router-link class="btn btn-outline-primary" :to="{ name: 'post', params: { id: post.post_id } }">Посмотреть пост</router-link>
-                    </div>
-                </div>
-            </div>
+        <div v-else class="row">
+            <PostCard
+                v-for="post in posts"
+                v-bind:post="post"
+                v-bind:key="post.post_id"
+            />
         </div>
     </div>
 </template>
 <script>
+    import PostCard from "./base/post/";
+
     export default {
+        components: {
+            PostCard,
+        },
         data() {
             return {
                 posts: null,
                 errors: false,
                 loading: true,
+                image: '../img/default.jpeg'
             }
         },
         mounted() {
@@ -43,3 +43,35 @@
         methods: {}
     }
 </script>
+<style lang="scss">
+    .card {
+        margin-bottom: 10px;
+
+        &-img {
+            height: 200px;
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        &-btn {
+            display: flex;
+
+            a {
+                margin-right: 10px;
+            }
+        }
+
+        &-img, &-author &-date {
+            margin-bottom: 10px;
+        }
+
+        &-descr {
+            margin-bottom: 10px;
+        }
+
+        &-img__max {
+            height: 500px;
+        }
+    }
+</style>
