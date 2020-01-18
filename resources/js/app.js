@@ -16,6 +16,10 @@ axios.defaults.baseURL = 'http://localhost:8000/api';
 Vue.router = new VueRouter({
     routes: routes
 });
+Vue.router.beforeEach((to, _, next) => {
+    document.title = to.meta.title ? `${to.meta.title}` : 'Блог';
+    next()
+});
 
 App.router = Vue.router;
 new Vue(App).$mount('#app');
