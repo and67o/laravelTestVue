@@ -1,8 +1,10 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <NavbarMenuList/>
-        <NavbarSearch/>
-        <NavbarMenuAuth/>
+        <div class="container  navbar-collapse">
+            <NavbarMenuList/>
+            <NavbarSearch/>
+            <NavbarMenuAuth/>
+        </div>
     </nav>
 </template>
 

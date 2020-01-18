@@ -25,10 +25,34 @@
         mounted() {
         },
         methods: {
-            getImgPath(img) {
-                return img ? img : '../img/default.jpeg';
+            getImgPath(imgPath) {
+                return imgPath ? imgPath : '../img/default.jpeg';
             }
         }
     }
 </script>
+<style lang="scss">
+    .card {
+        margin-bottom: 10px;
+
+        &-img {
+            height: 200px;
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        &-img, &-author &-date {
+            margin-bottom: 10px;
+        }
+
+        &-descr {
+            margin-bottom: 10px;
+        }
+
+        &-img__max {
+            height: 500px;
+        }
+    }
+</style>
 
