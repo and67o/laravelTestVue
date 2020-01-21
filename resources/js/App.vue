@@ -17,7 +17,9 @@
         data: function () {
             return {}
         },
-        mounted() {},
+        mounted() {
+            console.log(this.$store.state)
+        },
         methods: {}
     }
 </script>
