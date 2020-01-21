@@ -28,7 +28,7 @@
         "laravel-vue-pagination": "^2.3.1",
         "node-sass": "^4.13.0",
         "vue": "latest",
-        "vue-axios": "latest",
+        "vue-axios": "^2.1.5",
         "vue-i18n": "^8.15.3",
         "vue-router": "latest",
         "vuex": "^3.1.2"
