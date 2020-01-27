@@ -55,16 +55,16 @@
         methods: {
             login(email, password) {
                 this.errors = [];
-                if (email && password) {
-                    this.$store
-                        .dispatch('auth/login', {email, password})
-                        .then(() => this.$router.push({name: "home"}));
-                }
                 if (!this.name) {
                     this.errors.push('Name');
                 }
                 if (!this.age) {
                     this.errors.push('Age');
+                }
+                if (email && password) {
+                    this.$store
+                        .dispatch('auth/login', {email, password})
+                        .then(() => this.$router.push({name: "home"}));
                 }
             }
         }
