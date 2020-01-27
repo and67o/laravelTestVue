@@ -1,16 +1,23 @@
 <template>
+<!--    TODO Переписать на бутстрап вью-->
     <div>
         <div class="row">
             <div class="span12">
-                <form class="form-horizontal" action='' method="POST">
+                <div v-if="errors.length">
+                    <b>Please correct the following error(s):</b>
+                    <ul>
+                        <li v-for="error in errors">{{ error }}</li>
+                    </ul>
+                </div>
+                <form class="form-horizontal" v-on:submit.prevent="login(input.email, input.password)">
                     <fieldset>
-                        <div id="legend">
+                        <div>
                             <legend class="">Login</legend>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="username">Email</label>
                             <div class="controls">
-                                <input type="text" id="username" name="username" placeholder="Email" v-model="input.username"
+                                <input type="text" id="username" name="username" placeholder="Email" v-model="input.email"
                                        class="input-xlarge">
                             </div>
                         </div>
@@ -23,9 +30,8 @@
                         </div>
                         <div class="control-group">
                             <div class="controls">
-                                <button class="btn btn-success" v-on:click.prevent="login()">Login</button>
+                                <button class="btn btn-success">Login</button>
                             </div>
-                            {{  error }}
                         </div>
                     </fieldset>
                 </form>
@@ -38,33 +44,28 @@
         data: function () {
             return {
                 input: {
-                    username: '',
+                    email: '',
                     password: '',
                 },
-                error: ''
+                errors: []
             }
         },
         mounted() {
         },
         methods: {
-            // TODO добавить валидацию
-            login() {
-                const username = this.input.username;
-                const password = this.input.password;
-                if (!username || !password) {
-                    this.error = 'Введите все данные';
+            login(email, password) {
+                this.errors = [];
+                if (email && password) {
+                    this.$store
+                        .dispatch('auth/login', {email, password})
+                        .then(() => this.$router.push({name: "home"}));
                 }
-                axios
-                    .post('http://127.0.0.1:8000/api/v1/login', {
-                            email: username,
-                            password: password
-                    })
-                    .then(response => {
-                        console.log(response);
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    });
+                if (!this.name) {
+                    this.errors.push('Name');
+                }
+                if (!this.age) {
+                    this.errors.push('Age');
+                }
             }
         }
     }

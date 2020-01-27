@@ -6,6 +6,7 @@ import auth from './auth.module';
 Vue.use(Vuex);
 
 const authModule = {
+    namespaced: true,
     state: auth.state,
     mutations: auth.mutations,
     actions: auth.actions,

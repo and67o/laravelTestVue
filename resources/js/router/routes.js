@@ -1,7 +1,7 @@
-import Home from './components/Home.vue';
-import Register from './components/Register.vue';
-import Login from './components/Login.vue';
-import Post from './components/Post';
+import Home from '../components/Home.vue';
+import Register from '../components/Register.vue';
+import Login from '../components/Login.vue';
+import Post from '../components/Post';
 
 const routes = [
     {

@@ -3,6 +3,7 @@ import {
     setToken,
     unsetToken
 } from "../base/tokenFunctions";
+import ApiService from "../api";
 
 const state = {
     token: Boolean(getToken),
@@ -12,12 +13,9 @@ const state = {
 };
 
 const getters = {
-    isAuth(state) {
-        return state.isAuth;
-    },
-    getErrors(state) {
-        return state.errors;
-    }
+    isAuth: (state) => state.isAuth,
+    getErrors: (state) => state.errors,
+    getUserId: (state) => state.userId,
 };
 
 const mutations = {
@@ -36,7 +34,7 @@ const mutations = {
         setToken(token);
     },
     resetAuth(state) {
-       unsetToken();
+        unsetToken();
         state.token = null;
         state.userId = null;
         state.isAuth = false;
@@ -44,7 +42,35 @@ const mutations = {
     }
 };
 
-const actions = {};
+const actions = {
+    login(context, params) {
+        return new Promise((resolve, reject) => {
+            ApiService.post('/v1/login', {
+                email: params.email,
+                password: params.password
+            })
+                .then(({data}) => {
+                    const {success: {token, userId}, success} = data;
+                    if (success) {
+                        context.commit('clearErrors');
+                        context.commit(
+                            'setAuth', {userId,token}
+                        );
+                        resolve(data);
+                    }
+                })
+                .catch(({response}) => {
+                    context.commit(
+                        'setError', {
+                            target: 'login',
+                            message: response.data.error
+                        }
+                    );
+                    reject(response);
+                });
+        });
+    }
+};
 
 export default {
     getters,
