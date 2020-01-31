@@ -2,32 +2,72 @@ import ApiService from "../../../api";
 
 const actions = {
     login(context, params) {
-        return new Promise((resolve, reject) => {
-            ApiService.post('/v1/login', {
+        ApiService
+            .post('/v1/login', {
                 email: params.email,
                 password: params.password
             })
-                .then(({data}) => {
-                    const {success: {token, userId}, success} = data;
-                    if (success) {
-                        context.commit('clearErrors');
-                        context.commit(
-                            'setAuth', {userId, token}
-                        );
-                        resolve(data);
-                    }
-                })
-                .catch(({response}) => {
+            .then(({data}) => {
+                const {
+                    success: {
+                        token,
+                        userId
+                    },
+                    success
+                } = data;
+
+                if (success) {
+                    context.commit('clearErrors');
                     context.commit(
-                        'setError', {
-                            target: 'login',
-                            message: response.data.error
-                        }
+                        'setAuth', {userId, token}
                     );
-                    reject(response);
-                });
-        });
-    }
+                }
+            })
+            .catch(({response}) => {
+                setError(
+                    context,
+                    'login',
+                    response.data.error
+                );
+            });
+    },
+    logout(context) {
+        context.commit('resetAuth');
+        ApiService
+            .get('/v1/login')
+            .then(({data}) => {
+                context.commit('resetAuth');
+            })
+            .catch(({response}) => {
+                setError(
+                    context,
+                    'logout',
+                    response.data.error
+                );
+            });
+    },
+    register(context, regParam) {
+        ApiService
+            .post("/v1/register", {regParam})
+            .then(({data}) => {
+                console.log(data);
+                context.commit('setAuth', {userId: data.userId, token: data.token});
+            })
+            .catch(({response}) => {
+                setError(
+                    context,
+                    'register',
+                    response.data.error
+                );
+            });
+    },
+    //TODO Проверку токена
+};
+
+const setError = (context, target, message) => {
+    context.commit(
+        'setError', {target, message}
+    );
 };
 
 export default actions;

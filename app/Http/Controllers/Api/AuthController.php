@@ -64,15 +64,9 @@ class AuthController extends Controller
 
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function getUser()
+    public function logout()
     {
-        $user = Auth::user();
-        return response()->json(
-            ['success' => $user],
-            $this->successStatus
-        );
+        return true;
     }
+
 }

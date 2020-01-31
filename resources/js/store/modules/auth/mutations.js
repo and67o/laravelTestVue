@@ -7,9 +7,10 @@ const mutations = {
     clearErrors(state) {
         state.errors = [];
     },
-    setError(state, {name, errorText}) {
-        state.errors[name].push({
-            message: errorText
+    setError(state, {target, message}) {
+        state.errors[target] = [];
+        state.errors[target].push({
+            message: message
         });
     },
     setAuth(state, {token, userId}) {

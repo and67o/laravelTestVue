@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form class="form-horizontal" action='' method="POST">
+        <form class="form-horizontal" v-on:submit.prevent="register">
             <fieldset>
                 <div id="legend">
                     <legend class="">Register</legend>
@@ -63,20 +63,10 @@
         methods: {
             // TODO добавить валидацию
             register() {
-                console.log(this.input);
-                // axios
-                //     .post('http://127.0.0.1:8000/api/v1/register', {
-                //         name: '',
-                //         email: '',
-                //         password: '',
-                //         c_password: ''
-                //     })
-                //     .then(response => {
-                //         console.log(response);
-                //     })
-                //     .catch(e => {
-                //         console.log(e);
-                //     });
+                this.$store
+                    .dispatch('auth/register', this.input)
+                    // .then(() => this.$router.push({name: "home"}));
+
             }
         }
     }

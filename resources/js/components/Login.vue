@@ -54,6 +54,7 @@
         },
         methods: {
             login(email, password) {
+                //TODO Нормальная валидация
                 this.errors = [];
                 if (!this.name) {
                     this.errors.push('Name');
