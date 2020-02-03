@@ -47,11 +47,15 @@ const actions = {
             });
     },
     register(context, regParam) {
+        const {name, email, password, c_password} = regParam;
         ApiService
-            .post("/v1/register", {regParam})
+            .post("/v1/register", {email, name, password, c_password})
             .then(({data}) => {
                 console.log(data);
-                context.commit('setAuth', {userId: data.userId, token: data.token});
+                context.commit('setAuth', {
+                    userId: data.userId,
+                    token: data.success.token
+                });
             })
             .catch(({response}) => {
                 setError(
