@@ -12,21 +12,21 @@
     </ul>
 </template>
 <script>
-    import {
-        mapGetters
-    } from "vuex";
+import {
+  mapGetters
+} from 'vuex'
 
-    export default {
-        data: function () {
-            return {}
-        },
-        computed: {
-            ...mapGetters({
-                isAuth: 'auth/isAuth'
-            })
-        },
-        mounted() {
-        },
-        methods: {}
-    }
+export default {
+  data: function () {
+    return {}
+  },
+  computed: {
+    ...mapGetters({
+      isAuth: 'auth/isAuth'
+    })
+  },
+  mounted () {
+  },
+  methods: {}
+}
 </script>

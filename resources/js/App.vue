@@ -8,19 +8,19 @@
 </template>
 
 <script>
-    import Navbar from './components/base/navbar/';
+import Navbar from './components/base/navbar/'
 
-    export default {
-        components: {
-            Navbar,
-        },
-        data: function () {
-            return {}
-        },
-        mounted() {
-        },
-        methods: {}
-    }
+export default {
+  components: {
+    Navbar
+  },
+  data: function () {
+    return {}
+  },
+  mounted () {
+  },
+  methods: {}
+}
 </script>
 <style lang="css">
     body {

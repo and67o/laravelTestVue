@@ -5,7 +5,7 @@
         </div>
         <div class="card-body">
             <div class="card-img"
-                 v-bind:style="{backgroundImage:'url(' + getImgPath(post.img) + ')' }"
+                 :style="{backgroundImage:'url(' + getImgPath(post.img) + ')' }"
             ></div>
             <p class="card-author">Автор: {{ post.name }}</p>
             <router-link
@@ -17,19 +17,19 @@
     </div>
 </template>
 <script>
-    export default {
-        props: ['post'],
-        data() {
-            return {}
-        },
-        mounted() {
-        },
-        methods: {
-            getImgPath(imgPath) {
-                return imgPath ? imgPath : '../img/default.jpeg';
-            }
-        }
+export default {
+  props: ['post'],
+  data () {
+    return {}
+  },
+  mounted () {
+  },
+  methods: {
+    getImgPath (imgPath) {
+      return imgPath || '../img/default.jpeg'
     }
+  }
+}
 </script>
 <style lang="scss">
     .card {
@@ -55,4 +55,3 @@
         }
     }
 </style>
-

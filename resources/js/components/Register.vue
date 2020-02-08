@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form class="form-horizontal" v-on:submit.prevent="register">
+        <form class="form-horizontal"@:submit.prevent="register">
             <fieldset>
                 <div id="legend">
                     <legend class="">Register</legend>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="control-group">
                     <div class="controls">
-                        <button class="btn btn-success" v-on:click.prevent="register()">Login</button>
+                        <button class="btn btn-success" @:click.prevent="register()">Login</button>
                     </div>
                     {{ error }}
                 </div>
@@ -46,28 +46,27 @@
     </div>
 </template>
 <script>
-    export default {
-        data: function () {
-            return {
-                input: {
-                    name: '',
-                    email: '',
-                    password: '',
-                    c_password: '',
-                },
-                error: ''
-            }
-        },
-        mounted() {
-        },
-        methods: {
-            // TODO добавить валидацию
-            register() {
-                this.$store
-                    .dispatch('auth/register', this.input)
-                    // .then(() => this.$router.push({name: "home"}));
-
-            }
-        }
+export default {
+  data: function () {
+    return {
+      input: {
+        name: '',
+        email: '',
+        password: '',
+        c_password: ''
+      },
+      error: ''
     }
+  },
+  mounted () {
+  },
+  methods: {
+    // TODO добавить валидацию
+    register () {
+      this.$store
+        .dispatch('auth/register', this.input)
+      // .then(() => this.$router.push({name: "home"}));
+    }
+  }
+}
 </script>

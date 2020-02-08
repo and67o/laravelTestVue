@@ -9,20 +9,20 @@
 </template>
 
 <script>
-	import NavbarSearch from './Navbar-search.vue';
-	import NavbarMenuList from './Navbar-menu-list.vue';
-    import NavbarMenuAuth from './Navbar-menu-auth';
+import NavbarSearch from './Navbar-search.vue'
+import NavbarMenuList from './Navbar-menu-list.vue'
+import NavbarMenuAuth from './Navbar-menu-auth'
 
-    export default {
-		components: {
-			NavbarSearch,
-			NavbarMenuList,
-            NavbarMenuAuth
-		},
-		data: function () {
-			return {}
-		},
-		mounted() {},
-		methods: {}
-	}
+export default {
+  components: {
+    NavbarSearch,
+    NavbarMenuList,
+    NavbarMenuAuth
+  },
+  data: function () {
+    return {}
+  },
+  mounted () {},
+  methods: {}
+}
 </script>

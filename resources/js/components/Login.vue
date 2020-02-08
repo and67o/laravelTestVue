@@ -9,7 +9,7 @@
                         <li v-for="error in errors">{{ error }}</li>
                     </ul>
                 </div>
-                <form class="form-horizontal" v-on:submit.prevent="login(input.email, input.password)">
+                <form class="form-horizontal" @:submit.prevent="login(input.email, input.password)">
                     <fieldset>
                         <div>
                             <legend class="">Login</legend>
@@ -40,34 +40,34 @@
     </div>
 </template>
 <script>
-    export default {
-        data: function () {
-            return {
-                input: {
-                    email: '',
-                    password: '',
-                },
-                errors: []
-            }
-        },
-        mounted() {
-        },
-        methods: {
-            login(email, password) {
-                //TODO Нормальная валидация
-                this.errors = [];
-                if (!this.name) {
-                    this.errors.push('Name');
-                }
-                if (!this.age) {
-                    this.errors.push('Age');
-                }
-                if (email && password) {
-                    this.$store
-                        .dispatch('auth/login', {email, password})
-                        .then(() => this.$router.push({name: "home"}));
-                }
-            }
-        }
+export default {
+  data: function () {
+    return {
+      input: {
+        email: '',
+        password: ''
+      },
+      errors: []
     }
+  },
+  mounted () {
+  },
+  methods: {
+    login (email, password) {
+      // TODO Нормальная валидация
+      this.errors = []
+      if (!this.name) {
+        this.errors.push('Name')
+      }
+      if (!this.age) {
+        this.errors.push('Age')
+      }
+      if (email && password) {
+        this.$store
+          .dispatch('auth/login', { email, password })
+          .then(() => this.$router.push({ name: 'home' }))
+      }
+    }
+  }
+}
 </script>
