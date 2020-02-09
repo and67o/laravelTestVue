@@ -17,7 +17,7 @@ const actions = {
   logout (context) {
     context.commit('resetAuth')
     ApiService
-      .get('/v1/login')
+      .get('/v1/logout')
       .then(({ data }) => {
         context.commit('resetAuth')
       })
@@ -34,22 +34,13 @@ const actions = {
     const { name, email, password, c_password } = regParam
     ApiService
       .post('/v1/register', { email, name, password, c_password })
-      .then(({ data }) => {
-        console.log(data)
-        context.commit('setAuth', {
-          userId: data.userId,
-          token: data.success.token
-        })
+      .then(({ userId, success: token }) => {
+        context.commit('setAuth', { userId, token })
       })
-      .catch(({ response }) => {
-        setError(
-          context,
-          'register',
-          response.data.error
-        )
+      .catch(({ response: { data: { error } } }) => {
+        setError(context, 'register', error)
       })
   }
-  // TODO Проверку токена
 }
 
 const setError = (context, target, message) => {

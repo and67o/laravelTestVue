@@ -2,6 +2,7 @@ import Home from '../components/Home.vue'
 import Register from '../components/Register.vue'
 import Login from '../components/Login.vue'
 import Post from '../components/Post'
+import CreatePost from '../components/CreatePost'
 
 const routes = [
   {
@@ -29,11 +30,19 @@ const routes = [
     }
   },
   {
-    path: '/show/:id',
+    path: '/post/show/:id',
     name: 'post',
     component: Post,
     meta: {
       title: 'Post'
+    }
+  },
+  {
+    path: '/post/create',
+    name: 'postCreate',
+    component: CreatePost,
+    meta: {
+      title: 'Create Post'
     }
   }
 ]

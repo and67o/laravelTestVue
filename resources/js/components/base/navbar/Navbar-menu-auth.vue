@@ -7,7 +7,7 @@
             <router-link class="nav-link" :to="{ name: 'login' }">Войти</router-link>
         </li>
         <li v-if="isAuth" class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'logout' }">Выйти</router-link>
+            <span class="nav-item" @click="logout()">Выйти</span>
         </li>
     </ul>
 </template>
@@ -27,6 +27,10 @@ export default {
   },
   mounted () {
   },
-  methods: {}
+  methods: {
+    logout () {
+      this.$store.dispatch('logout')
+    }
+  }
 }
 </script>

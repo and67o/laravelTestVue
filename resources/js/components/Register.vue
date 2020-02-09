@@ -65,7 +65,7 @@ export default {
     register () {
       this.$store
         .dispatch('register', this.input)
-      // .then(() => this.$router.push({name: "home"}));
+        .then(() => this.$router.push({ name: 'home' }))
     }
   }
 }

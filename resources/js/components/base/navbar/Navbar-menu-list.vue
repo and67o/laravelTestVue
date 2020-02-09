@@ -4,7 +4,7 @@
             <router-link class="nav-link" :to="{ name: 'home' }">Главная</router-link>
         </li>
         <li class="nav-item">
-            <router-link class="nav-link" to="/post/create">Создать пост</router-link>
+            <router-link class="nav-link" :to="{ name: 'postCreate' }">Создать пост</router-link>
         </li>
     </ul>
 </template>
