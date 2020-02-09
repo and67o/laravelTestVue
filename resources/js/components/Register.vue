@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form class="form-horizontal"@:submit.prevent="register">
+        <form class="form-horizontal" @submit.prevent="register" action="POST">
             <fieldset>
                 <div id="legend">
                     <legend class="">Register</legend>

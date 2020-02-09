@@ -9,7 +9,7 @@
                         <li v-for="error in errors">{{ error }}</li>
                     </ul>
                 </div>
-                <form class="form-horizontal" @:submit.prevent="login(input.email, input.password)">
+                <form class="form-horizontal" @submit.prevent="login(input.email, input.password)">
                     <fieldset>
                         <div>
                             <legend class="">Login</legend>
@@ -53,6 +53,7 @@ export default {
   mounted () {
   },
   methods: {
+
     login (email, password) {
       // TODO Нормальная валидация
       this.errors = []
@@ -65,7 +66,7 @@ export default {
       if (email && password) {
         this.$store
           .dispatch('auth/login', { email, password })
-          .then(() => this.$router.push({ name: 'home' }))
+          // .then(() => this.$router.push({ name: 'home' }))
       }
     }
   }

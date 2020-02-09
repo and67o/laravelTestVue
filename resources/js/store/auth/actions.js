@@ -1,34 +1,17 @@
 import ApiService from '../../api'
 
 const actions = {
-  login (context, params) {
+  login (context, { email, password }) {
     ApiService
-      .post('/v1/login', {
-        email: params.email,
-        password: params.password
-      })
-      .then(({ data }) => {
-        const {
-          success: {
-            token,
-            userId
-          },
-          success
-        } = data
-
-        if (success) {
+      .post('/v1/login', { email, password })
+      .then(({ data: { result, token, error } }) => {
+        if (result) {
           context.commit('clearErrors')
-          context.commit(
-            'setAuth', { userId, token }
-          )
+          context.commit('setAuth', { result, token })
         }
       })
-      .catch(({ response }) => {
-        setError(
-          context,
-          'login',
-          response.data.error
-        )
+      .catch(({ response: { data: { error } } }) => {
+        setError(context, 'login', error)
       })
   },
   logout (context) {
@@ -47,6 +30,7 @@ const actions = {
       })
   },
   register (context, regParam) {
+    // eslint-disable-next-line camelcase
     const { name, email, password, c_password } = regParam
     ApiService
       .post('/v1/register', { email, name, password, c_password })
