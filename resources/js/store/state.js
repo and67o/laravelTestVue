@@ -1,6 +1,6 @@
 import {
   getToken
-} from '../../base/tokenFunctions'
+} from '../base/tokenFunctions'
 
 const state = {
   token: null,

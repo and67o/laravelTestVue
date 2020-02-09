@@ -1,7 +1,7 @@
 import {
   setToken,
   unsetToken
-} from '../../base/tokenFunctions'
+} from '../base/tokenFunctions'
 
 const mutations = {
   clearErrors (state) {

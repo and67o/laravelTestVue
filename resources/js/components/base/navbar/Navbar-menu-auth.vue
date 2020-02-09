@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      isAuth: 'auth/isAuth'
+      isAuth: 'isAuth'
     })
   },
   mounted () {

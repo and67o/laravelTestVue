@@ -64,7 +64,7 @@ export default {
     // TODO добавить валидацию
     register () {
       this.$store
-        .dispatch('auth/register', this.input)
+        .dispatch('register', this.input)
       // .then(() => this.$router.push({name: "home"}));
     }
   }
