@@ -1,15 +1,15 @@
 import {
-    TOKEN_NAME
-} from "./constants";
+  TOKEN_NAME
+} from './constants'
 
 export const getToken = () => {
-    return window.localStorage.getItem(TOKEN_NAME)
-};
+  return window.localStorage.getItem(TOKEN_NAME)
+}
 
 export const setToken = token => {
-    window.localStorage.setItem(TOKEN_NAME, token);
-};
+  window.localStorage.setItem(TOKEN_NAME, token)
+}
 
 export const unsetToken = () => {
-    window.localStorage.removeItem(TOKEN_NAME);
-};
+  window.localStorage.removeItem(TOKEN_NAME)
+}

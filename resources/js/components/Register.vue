@@ -5,36 +5,42 @@
                 <div id="legend">
                     <legend class="">Register</legend>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" id="name" name="username" placeholder="Name" v-model="input.name"
-                               class="input-xlarge">
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="email">Email</label>
-                    <div class="controls">
-                        <input type="text" id="email" name="username" placeholder="Email" v-model="input.email"
-                               class="input-xlarge">
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="password">Password</label>
-                    <div class="controls">
-                        <input type="password" id="password" name="password" placeholder="Password"
-                               v-model="input.password"
-                               class="input-xlarge">
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="c_password">Confirm Password</label>
-                    <div class="controls">
-                        <input type="password" id="c_password" name="password" placeholder="Password"
-                               v-model="input.c_password"
-                               class="input-xlarge">
-                    </div>
-                </div>
+
+                <Input
+                    nameField="Name"
+                    target="name"
+                    type="name"
+                    placeholder="Name"
+                    v-model="input.name"
+                    :error=getError().name
+                />
+                <Input
+                    nameField="Email"
+                    target="email"
+                    type="email"
+                    placeholder="Email"
+                    v-model="input.email"
+                    :error=getError().email
+                />
+
+                <Input
+                    nameField="Password"
+                    target="password"
+                    type="password"
+                    placeholder="Password"
+                    v-model="input.password"
+                    :error=getError().password
+                />
+
+                <Input
+                    nameField="Confirm Password"
+                    target="password"
+                    type="password"
+                    placeholder="Password"
+                    v-model="input.c_password"
+                    :error=getError().c_password
+                />
+
                 <div class="control-group">
                     <div class="controls">
                         <button class="btn btn-success" @:click.prevent="register()">Login</button>
@@ -46,7 +52,12 @@
     </div>
 </template>
 <script>
+import Input from './base/tags/Input'
+
 export default {
+  components: {
+    Input
+  },
   data: function () {
     return {
       input: {
@@ -61,11 +72,15 @@ export default {
   mounted () {
   },
   methods: {
+    getError () {
+      return this.$store.state.errors
+    },
     // TODO добавить валидацию
     register () {
       this.$store
         .dispatch('register', this.input)
         .then(() => this.$router.push({ name: 'home' }))
+        .catch(() => false)
     }
   }
 }

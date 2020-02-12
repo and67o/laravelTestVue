@@ -6,7 +6,7 @@ const state = {
   token: null,
   isAuth: Boolean(getToken()),
   userId: null,
-  errors: []
+  errors: {}
 }
 
 export default state

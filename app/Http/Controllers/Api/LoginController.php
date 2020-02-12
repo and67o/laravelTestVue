@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LoginStoreRequest;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -16,10 +16,10 @@ class LoginController extends Controller
     }
 
     /**
-     * @param LoginStoreRequest $request
+     * @param Request $request
      * @return JsonResponse
      */
-    public function login(LoginStoreRequest $request)
+    public function login(Request $request)
     {
         $response = [
             'result' => false,

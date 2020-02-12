@@ -30,6 +30,7 @@ export default {
   methods: {
     logout () {
       this.$store.dispatch('logout')
+        .catch(() => false)
     }
   }
 }
