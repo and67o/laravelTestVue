@@ -3,10 +3,11 @@
         <label class="control-label" :for="target">{{nameField}}</label>
         <div class="controls">
             <input
-                :type=target
+                :type=type
                 :name=target
-                :id=type
+                :id=id
                 :placeholder=placeholder
+                @input="$emit('input', $event.target.value)"
                 class="input-xlarge"
             >
         </div>
@@ -19,10 +20,13 @@ export default {
     'target',
     'type',
     'placeholder',
-    'model',
     'nameField',
-    'error'
+    'error',
+    'id'
   ],
+  model: {
+    prop: 'value'
+  },
   data: function () {
     return {}
   },

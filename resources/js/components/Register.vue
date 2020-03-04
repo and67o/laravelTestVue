@@ -10,6 +10,7 @@
                     nameField="Name"
                     target="name"
                     type="name"
+                    id="name"
                     placeholder="Name"
                     v-model="input.name"
                     :error=getError().name
@@ -18,6 +19,7 @@
                     nameField="Email"
                     target="email"
                     type="email"
+                    id="email"
                     placeholder="Email"
                     v-model="input.email"
                     :error=getError().email
@@ -27,6 +29,7 @@
                     nameField="Password"
                     target="password"
                     type="password"
+                    id="password"
                     placeholder="Password"
                     v-model="input.password"
                     :error=getError().password
@@ -36,6 +39,7 @@
                     nameField="Confirm Password"
                     target="password"
                     type="password"
+                    id="c_password"
                     placeholder="Password"
                     v-model="input.c_password"
                     :error=getError().c_password

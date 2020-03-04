@@ -36,7 +36,9 @@
     </div>
 </template>
 <script>
+
 import Input from './base/tags/Input'
+
 export default {
   components: {
     Input
