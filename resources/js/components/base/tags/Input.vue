@@ -1,6 +1,8 @@
 <template>
     <div class="control-group">
-        <label class="control-label" :for="target">{{nameField}}</label>
+        <label class="control-label" :for="target">
+            {{nameField}}
+        </label>
         <div class="controls">
             <input
                 :type=type
@@ -11,7 +13,12 @@
                 class="input-xlarge"
             >
         </div>
-        <span v-if="error">{{error[0]}}</span>
+        <span
+            class="text-danger"
+            v-if="error"
+        >
+            {{error[0]}}
+        </span>
     </div>
 </template>
 <script>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Post;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -18,15 +19,25 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::join('users', 'author_id', '=', 'users.id')
-            ->orderBy('posts.created_at', 'desc')
-            ->paginate(self::COUNT_OF_PAGE);
+        $posts = Post::query()
+            ->with('author')
+            ->orderBy('posts.created_at', 'desc');
+
+        if ($request->search) {
+            $posts = $posts
+                ->where('title', 'like', '%' . $request->search . '%')
+                ->orWhere('descr', 'like', '%' . $request->search . '%')
+                ->orWhere('name', 'like', '%' . $request->search . '%');
+        }
         return response()->json(
-            ['posts' => $posts]
+            [
+                'posts' => $posts->paginate(self::COUNT_OF_PAGE)
+            ]
         );
     }
 
@@ -57,8 +68,9 @@ class PostController extends Controller
      * @param Post $Post
      * @return Post
      */
-    private function _getFieldParams(PostRequest $request, Post $Post) {
-        $Post->title = $request->title;
+    private function _getFieldParams(PostRequest $request, Post $Post)
+    {
+        $Post->title = $request->toArray();
         $Post->short_title = (Str::length($request->title) > 30)
             ? Str::substr($request->title, 0, 30) . '...'
             : $request->title;

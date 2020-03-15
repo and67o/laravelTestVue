@@ -37,7 +37,7 @@ export default {
       return imgPath || '../img/default.jpeg'
     },
     getResult (id) {
-      const url = 'http://127.0.0.1:8000/api/v1/post/show/' + id
+      const url = '/v1/post/show/' + id
       // eslint-disable-next-line no-undef
       axios
         .get(url)

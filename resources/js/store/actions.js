@@ -1,5 +1,4 @@
 import ApiService from '../api'
-import {getToken} from "../base/tokenFunctions";
 
 const actions = {
   login (context, { email, password }) {
@@ -42,14 +41,39 @@ const actions = {
         .post('/v1/register', { email, name, password, c_password })
         .then(({ userId, success: token }) => {
           context.commit('setAuth', { userId, token })
+          resolve()
         })
         .catch(({ response: { data: { error } } }) => {
           context.commit('setError', error)
+          reject(error)
         })
     })
   },
   checkAuth (context) {
 
+  },
+  posts (context, {
+    page
+  } = postsParam
+  ) {
+    return new Promise((resolve, reject) => {
+      ApiService
+        .get('/v1/posts?page=' + page)
+        .then(({
+          data: {
+            posts
+          }
+          // eslint-disable-next-line no-undef
+        } = response) => {
+            // console.log(posts)
+          context.commit('setPosts', posts)
+          resolve()
+        })
+        .catch(error => {
+          // console.log(error)
+          reject(error)
+        })
+    })
   }
 }
 

@@ -22,6 +22,9 @@ const mutations = {
     state.userId = null
     state.isAuth = false
     state.errors = []
+  },
+  setPosts (state, posts) {
+    state.posts = posts
   }
 }
 

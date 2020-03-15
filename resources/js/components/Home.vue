@@ -2,15 +2,18 @@
     <div class="content">
 
         <section v-if="errors">
-            <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+            <p>Have Errors</p>
         </section>
 
-        <div v-else class="row">
+        <div class="row" v-else-if="posts.data">
             <PostCard
                 v-for="post in posts.data"
                 :post="post"
                 :key="post.post_id"
             />
+        </div>
+        <div v-else>
+            No posts
         </div>
 
         <Pagination :data="posts" @pagination-change-page="getPosts"/>
@@ -28,12 +31,19 @@ export default {
   },
   data () {
     return {
-      posts: {},
       errors: false,
       loading: true
     }
   },
+  computed: {
+    posts () {
+      return this.$store.getters.getAllPosts
+    }
+  },
   mounted () {
+    if (this.posts.length) {
+      return {}
+    }
     this.getPosts()
   },
   methods: {
@@ -41,18 +51,7 @@ export default {
       if (typeof page === 'undefined') {
         page = 1
       }
-      // eslint-disable-next-line no-undef
-      axios
-        .get('http://127.0.0.1:8000/api/v1/posts?page=' + page)
-        .then(response => {
-          this.posts = response.data.posts
-        })
-        .catch(e => {
-          console.log(e)
-        })
-        .finally(() => (
-          this.loading = false)
-        )
+      this.$store.dispatch('posts', { page })
     }
   }
 }
