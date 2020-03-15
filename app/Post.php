@@ -28,6 +28,11 @@ class Post extends Model
 
     protected $fillable = ['id', 'author_id', 'title', 'short_title', 'img', 'descr', 'created_at', 'updated_at'];
 
+    protected $casts = [
+        'id' => 'integer',
+        'author_id' => 'integer',
+    ];
+
     /**
      * @return HasOne
      */
