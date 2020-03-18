@@ -7,7 +7,7 @@
             <div class="card-img"
                  :style="{backgroundImage:'url(' + getImgPath(post.img) + ')' }"
             ></div>
-            <p class="card-author">Автор: {{ post.author.name }}</p>
+            <p class="card-author">Автор: {{ post.name }}</p>
             <router-link
                 class="btn btn-outline-primary"
                 :to="{ name: 'post', params: { id: post.post_id } }"

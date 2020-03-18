@@ -25,18 +25,24 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $posts = Post::query()
-            ->with('author')
+           ->leftJoin('users', 'author_id', '=', 'users.id')
             ->orderBy('posts.created_at', 'desc');
 
         if ($request->search) {
+            $search = str_replace("/", "", $request->search);
             $posts = $posts
-                ->where('title', 'like', '%' . $request->search . '%')
-                ->orWhere('descr', 'like', '%' . $request->search . '%')
-                ->orWhere('name', 'like', '%' . $request->search . '%');
+                ->where('title', 'like', '%' . $search . '%')
+                ->orWhere('descr', 'like', '%' . $search . '%')
+                ->orWhere('users.name', 'like', '%' . $search . '%');
         }
         return response()->json(
             [
-                'posts' => $posts->paginate(self::COUNT_OF_PAGE)
+                'posts' => $posts->paginate(
+                    self::COUNT_OF_PAGE,
+                    ['*'],
+                    'page',
+                    (int) $request->page
+                )
             ]
         );
     }

@@ -25,7 +25,10 @@ export default {
   },
   methods: {
     search () {
-      console.log(this.searchValue)
+      this.$store.dispatch('posts', {
+        page: 1,
+        search: this.searchValue
+      })
     }
   }
 }

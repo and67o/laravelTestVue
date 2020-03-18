@@ -53,19 +53,19 @@ const actions = {
 
   },
   posts (context, {
-    page
+    page,
+    search
   } = postsParam
   ) {
     return new Promise((resolve, reject) => {
+        search = search ? '&search=' + search : ''
+      const url = '/v1/posts?page=' + page + search
+        console.log(url)
       ApiService
-        .get('/v1/posts?page=' + page)
+        .get(url)
         .then(({
-          data: {
-            posts
-          }
-          // eslint-disable-next-line no-undef
+          data: { posts }
         } = response) => {
-            // console.log(posts)
           context.commit('setPosts', posts)
           resolve()
         })

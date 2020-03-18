@@ -13,10 +13,15 @@
             />
         </div>
         <div v-else>
-            No posts
+            <span>
+                No posts
+            </span>
         </div>
 
-        <Pagination :data="posts" @pagination-change-page="getPosts"/>
+        <Pagination
+            :data="posts"
+            @pagination-change-page="getPosts"
+        />
 
     </div>
 </template>
@@ -47,7 +52,7 @@ export default {
     this.getPosts()
   },
   methods: {
-    getPosts (page) {
+    getPosts (page = 1) {
       if (typeof page === 'undefined') {
         page = 1
       }
