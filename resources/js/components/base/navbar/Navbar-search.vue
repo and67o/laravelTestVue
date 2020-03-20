@@ -1,5 +1,5 @@
 <template>
-    <form class="form-inline my-2 my-lg-0" @submit.prevent="search" action="POST">
+    <form class="form-inline my-2 my-lg-0" @submit.prevent="search">
         <input
             class="form-control mr-sm-2"
             name="search"

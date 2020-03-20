@@ -47,7 +47,7 @@
 
                 <div class="control-group">
                     <div class="controls">
-                        <button class="btn btn-success" @:click.prevent="register()">Login</button>
+                        <button class="btn btn-success">Login</button>
                     </div>
                     {{ error }}
                 </div>

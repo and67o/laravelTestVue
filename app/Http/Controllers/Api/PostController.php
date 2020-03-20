@@ -55,13 +55,16 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        return response()->json(
-            [
-                'post' => Post::query()->with('author')->find($id)
-            ]
-        );
+        return response()->json([
+            'post' => Post::query()
+                ->with('author')
+                ->find($id)
+        ]);
     }
 
+    /**
+     * @param PostRequest $request
+     */
     public function store(PostRequest $request)
     {
         $Post = new Post();

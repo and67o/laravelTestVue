@@ -6,8 +6,13 @@
                     <h2>{{ post.title }}</h2>
                 </div>
                 <div class="card-body">
-                    <div class="card-img cart-img__max"
-                         :style="{backgroundImage:'url(' + getImgPath(post.img) + ')' }"
+                    <template v-if="post.img">
+                        <div class="card-img" :style="{backgroundImage:'url(' + post.img + ')' }"></div>
+                    </template>
+                    <div
+                        v-else
+                        class="card-img"
+                        style='background:url("../../img/default.jpeg");'
                     ></div>
                     <div class="cart-descr">Описание: {{ post.descr }}</div>
                     <div class="card-author">Автор: {{ post.name }}</div>
@@ -24,32 +29,21 @@
 export default {
   data () {
     return {
-      post: null,
       title: null
+    }
+  },
+  computed: {
+    post () {
+      return this.$store.getters.getPost
     }
   },
   mounted () {
     const id = this.$route.params.id
-    this.getResult(id)
+    this.getPost(id)
   },
   methods: {
-    getImgPath (imgPath) {
-      return imgPath || '../img/default.jpeg'
-    },
-    getResult (id) {
-      const url = '/v1/post/show/' + id
-      // eslint-disable-next-line no-undef
-      axios
-        .get(url)
-        .then(response => {
-          this.post = response.data.post
-        })
-        .catch(e => {
-          console.log(e)
-        })
-        .finally(() => (
-          this.loading = false
-        ))
+    getPost (id) {
+      this.$store.dispatch('post', id)
     }
   }
 }

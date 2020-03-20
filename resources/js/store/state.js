@@ -7,7 +7,8 @@ const state = {
   isAuth: Boolean(getToken()),
   userId: null,
   errors: {},
-  posts: {}
+  posts: {},
+  post: {}
 }
 
 export default state

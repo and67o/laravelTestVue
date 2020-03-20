@@ -37,7 +37,10 @@ class RegisterController extends Controller
 
         $response['token'] = $user->createToken('AppName')->accessToken;
         $response['result'] = true;
-        return response()->json($response, 200);
+        return response()->json(
+            $response,
+            200
+        );
     }
 
     /**

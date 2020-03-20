@@ -71,6 +71,23 @@ const actions = {
           reject(error)
         })
     })
+  },
+  post (context, id) {
+    return new Promise((resolve, reject) => {
+      const url = '/v1/post/show/' + id
+      ApiService
+        .get(url)
+        .then(({
+          data: { post }
+          // eslint-disable-next-line no-undef
+        } = response) => {
+          context.commit('setPost', post)
+          resolve()
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
   }
 }
 

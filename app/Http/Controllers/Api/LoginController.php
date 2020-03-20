@@ -8,11 +8,18 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * Class LoginController
+ * @package App\Http\Controllers\Api
+ */
 class LoginController extends Controller
 {
+    /**
+     * LoginController constructor.
+     */
     public function __construct()
     {
-//        $this->middleware('guest');
+        $this->middleware('guest');
     }
 
     /**
@@ -37,12 +44,10 @@ class LoginController extends Controller
             );
         }
 
-        if (!Auth::attempt(
-            [
-                'email' => $input['email'],
-                'password' => $input['password']
-            ])
-        ) {
+        if (!Auth::attempt([
+            'email' => $input['email'],
+            'password' => $input['password']
+        ])) {
             $response['error'] = 'Unauthorised';
             return response()->json(
                 $response,
@@ -59,6 +64,9 @@ class LoginController extends Controller
         );
     }
 
+    /**
+     * @return array
+     */
     private function rules() {
         return [
             'email' => 'required|email',
