@@ -43,14 +43,13 @@ export default {
         .get(url)
         .then(response => {
           this.post = response.data.post
-          console.log(response)
         })
         .catch(e => {
           console.log(e)
         })
         .finally(() => (
-          this.loading = false)
-        )
+          this.loading = false
+        ))
     }
   }
 }

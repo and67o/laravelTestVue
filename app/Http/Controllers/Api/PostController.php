@@ -25,11 +25,11 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $posts = Post::query()
-           ->leftJoin('users', 'author_id', '=', 'users.id')
+            ->leftJoin('users', 'author_id', '=', 'users.id')
             ->orderBy('posts.created_at', 'desc');
 
-        if ($request->search) {
-            $search = str_replace("/", "", $request->search);
+        if ($request->input('search')) {
+            $search = str_replace('/', '', $request->input('search'));
             $posts = $posts
                 ->where('title', 'like', '%' . $search . '%')
                 ->orWhere('descr', 'like', '%' . $search . '%')
@@ -41,7 +41,7 @@ class PostController extends Controller
                     self::COUNT_OF_PAGE,
                     ['*'],
                     'page',
-                    (int) $request->page
+                    (int) $request->input('page')
                 )
             ]
         );
@@ -55,10 +55,10 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::join('users', 'author_id', '=', 'users.id')
-            ->find($id);
         return response()->json(
-            ['post' => $post]
+            [
+                'post' => Post::query()->with('author')->find($id)
+            ]
         );
     }
 

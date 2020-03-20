@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form class="form-horizontal" @submit.prevent="register" action="POST">
+        <form class="form-horizontal" @submit.prevent="register">
             <fieldset>
                 <div id="legend">
                     <legend class="">Register</legend>
@@ -79,7 +79,6 @@ export default {
     getError () {
       return this.$store.state.errors
     },
-    // TODO добавить валидацию
     register () {
       this.$store
         .dispatch('register', this.input)

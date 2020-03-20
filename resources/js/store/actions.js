@@ -49,28 +49,25 @@ const actions = {
         })
     })
   },
-  checkAuth (context) {
-
-  },
   posts (context, {
     page,
     search
+    // eslint-disable-next-line no-undef
   } = postsParam
   ) {
     return new Promise((resolve, reject) => {
-        search = search ? '&search=' + search : ''
+      search = search ? '&search=' + search : ''
       const url = '/v1/posts?page=' + page + search
-        console.log(url)
       ApiService
         .get(url)
         .then(({
           data: { posts }
+          // eslint-disable-next-line no-undef
         } = response) => {
           context.commit('setPosts', posts)
           resolve()
         })
         .catch(error => {
-          // console.log(error)
           reject(error)
         })
     })
