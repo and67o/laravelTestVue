@@ -21,8 +21,6 @@ class CreatePostsTable extends Migration
             $table->string('img')->nullable();
             $table->text('descr');
             $table->timestamps();
-
-            $table->foreign('author_id')->references('id')->on('users');
         });
     }
 

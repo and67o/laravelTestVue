@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,13 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('v1')->group(function() {
-    Route::post('login', 'Api\LoginController@login');
+Route::prefix('v1')->group(function () {
+
+    Route::post('post', 'Api\PostController@store');
     Route::get('posts', 'Api\PostController@index');
     Route::get('post/show/{id}', 'Api\PostController@show');
 
+    Route::post('login', 'Api\LoginController@login');
     Route::post('register', 'Api\RegisterController@register');
-    Route::group(['middleware' => 'auth:api'], function() {
-        Route::post('getUser', 'Api\AuthController@getUser');
-    });
 });

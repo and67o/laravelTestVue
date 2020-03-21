@@ -11,10 +11,26 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+/**
+ * Class PostController
+ * @package App\Http\Controllers\Api
+ */
 class PostController extends Controller
 {
 
     const COUNT_OF_PAGE = 4;
+    /**
+     * @var Post
+     */
+    private $Post;
+
+    /**
+     * PostController constructor.
+     */
+    public function __construct()
+    {
+        $this->Post = new Post();
+    }
 
     /**
      * Display a listing of the resource.
@@ -67,30 +83,29 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $Post = new Post();
-        $Post = $this->_getFieldParams($request, $Post);
-        $Post->save();
+        $Post = $this->_getFieldParams($request);
+        $res = $Post->save();
+
     }
 
     /**
      * @param PostRequest $request
-     * @param Post $Post
      * @return Post
      */
-    private function _getFieldParams(PostRequest $request, Post $Post)
+    private function _getFieldParams(PostRequest $request)
     {
-        $Post->title = $request->toArray();
-        $Post->short_title = (Str::length($request->title) > 30)
+        $this->Post->title = $request->title;
+        $this->Post->short_title = (Str::length($request->title) > 30)
             ? Str::substr($request->title, 0, 30) . '...'
             : $request->title;
-        $Post->descr = $request->descr;
-        $Post->author_id = Auth::user()->id;
+        $this->Post->descr = $request->descr;
+        $this->Post->author_id = Auth::user() ? Auth::user()->id : 0;
 
-        if ($request->file('img')) {
-            $path = Storage::putFile('public', $request->file('img'));
+        if ($request->hasFile('img')) {
+            $path = Storage::putFile('posts', $request->file('img'));
             $url = Storage::url($path);
-            $Post->img = $url;
+            $this->Post->img = $url;
         }
-        return $Post;
+        return $this->Post;
     }
 }
