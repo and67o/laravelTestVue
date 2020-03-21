@@ -3,12 +3,12 @@
         <h3>Создать пост</h3>
         <div class="form-group">
             <label>
-                <input name="title" type="text" class="form-control" required value="">
+                <input name="title" type="text" class="form-control" v-model="title" value="">
             </label>
         </div>
         <div class="form-group">
             <label>
-                <textarea name="descr" rows="10" class="form-control" required></textarea>
+                <textarea name="descr" rows="10" class="form-control" v-model="descr" ></textarea>
             </label>
         </div>
         <div class="form-group">
@@ -22,7 +22,8 @@
 export default {
   data () {
     return {
-
+        title: '',
+        descr: ''
     }
   },
   mounted () {
