@@ -3,34 +3,32 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
 use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * Class RegisterController
+ * @package App\Http\Controllers\Api
+ */
 class RegisterController extends Controller
 {
 
     /**
-     * @param Request $request
+     * @param RegisterRequest $request
      * @return JsonResponse
      */
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
         $response = [
             'result' => false,
             'token' => '',
             'error' => '',
         ];
+
         $input = $request->all();
-        $validator = Validator::make($input, $this->rules());
-        if ($validator->fails()) {
-            $response['error'] = $validator->errors()->getMessages();
-            return response()->json(
-                $response,
-                422
-            );
-        }
 
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);

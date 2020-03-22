@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -23,32 +24,23 @@ class LoginController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param LoginRequest $request
      * @return JsonResponse
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         $response = [
             'result' => false,
             'token' => '',
-            'error' => '',
+            'errors' => '',
         ];
         $input = $request->all();
-
-        $validator = Validator::make($input, $this->rules());
-        if ($validator->fails()) {
-            $response['error'] = $validator->errors()->getMessages();
-            return response()->json(
-                $response,
-                422
-            );
-        }
 
         if (!Auth::attempt([
             'email' => $input['email'],
             'password' => $input['password']
         ])) {
-            $response['error'] = 'Unauthorised';
+            $response['errors'] = 'Unauthorised';
             return response()->json(
                 $response,
                 JsonResponse::HTTP_UNAUTHORIZED
@@ -62,16 +54,6 @@ class LoginController extends Controller
             $response,
             JsonResponse::HTTP_OK
         );
-    }
-
-    /**
-     * @return array
-     */
-    private function rules() {
-        return [
-            'email' => 'required|email',
-            'password' => 'required',
-        ];
     }
 
     /**

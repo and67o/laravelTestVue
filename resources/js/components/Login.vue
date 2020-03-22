@@ -11,6 +11,7 @@
                             nameField="Email"
                             target="email"
                             type="email"
+                            id="email"
                             placeholder="Email"
                             v-model="input.email"
                             error="email"
@@ -21,6 +22,7 @@
                             target="password"
                             type="password"
                             placeholder="Password"
+                            id="password"
                             v-model="input.password"
                             error="password"
                         />

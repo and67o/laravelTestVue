@@ -68,8 +68,8 @@ export default {
   methods: {
     getError (nameField) {
       return this.errors[nameField]
-          ? this.errors[nameField][0]
-          : ''
+        ? this.errors[nameField][0]
+        : ''
     }
   }
 }

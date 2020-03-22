@@ -12,13 +12,9 @@ const actions = {
             resolve(result)
           }
         })
-        .catch(({
-          response: {
-            data: { error }
-          }
-        }) => {
-          context.commit('setError', error)
-          reject(error)
+        .catch(({ response: { data: { errors } } }) => {
+          context.commit('setError', errors)
+          reject(errors)
         })
     })
   },
@@ -31,12 +27,7 @@ const actions = {
           context.commit('resetAuth')
           resolve()
         })
-        .catch(({
-          response:
-                        {
-                          data: { error }
-                        }
-        }) => {
+        .catch(({ response: { data: { error } } }) => {
           context.commit('setError', error)
           reject(error)
         })
@@ -105,7 +96,7 @@ const actions = {
       ApiService
         .post('/v1/post', postParam)
         .then(response => {
-            resolve(response)
+          resolve(response)
         })
         .catch(({ response: { data: { errors } } }) => {
           context.commit('setError', errors)

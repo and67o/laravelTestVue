@@ -7,3 +7,5 @@ Example http://127.0.0.1:8000/api/v1/login?email=oleg12@mail.ru&password=1234567
 http://127.0.0.1:8000/api/v1/register?name=oleg&email=oleg123@mail.ru&password=123456789&c_password=123456789
 
 http://127.0.0.1:8000/api/v1/posts?page=2
+
+php artisan passport:client --personal
