@@ -6,7 +6,10 @@
         <div class="card-body">
 
             <template v-if="post.img">
-                <div class="card-img" :style="{backgroundImage:'url(' + post.img + ')' }"></div>
+                <div
+                    class="card-img"
+                    :style="{backgroundImage:'url(' + post.img + ')' }"
+                ></div>
             </template>
             <div
                 v-else
@@ -17,7 +20,7 @@
             <p class="card-author">Автор: {{ post.name }}</p>
             <router-link
                 class="btn btn-outline-primary"
-                :to="{ name: 'post', params: { id: post.post_id } }"
+                :to="{ name: 'post', params: { id: post.id } }"
             >
                 Посмотреть пост
             </router-link>
@@ -26,7 +29,12 @@
 </template>
 <script>
 export default {
-  props: ['post'],
+  props: {
+    post: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data () {
     return {}
   },

@@ -3,23 +3,20 @@
         <label class="control-label" :for="target">
             {{nameField}}
         </label>
-        <div class="controls">
-            <input
-                :type=type
-                :name=target
-                :id=id
-                :placeholder=placeholder
-                @input="$emit('input', $event.target.value)"
-                class="input-xlarge"
-            >
-        </div>
+            <div class="controls">
+                <textarea
+                    :name=target
+                    :rows=rows
+                    class="form-control"
+                    @input="$emit('input', $event.target.value)"
+                ></textarea>
+            </div>
         <span
             class="text-danger"
             v-if="Object.keys(errors).length !== 0"
         >
             {{ getError(error) }}
         </span>
-
     </div>
 </template>
 <script>
@@ -31,29 +28,21 @@ export default {
       type: String,
       default: ''
     },
-    type: {
-      type: String,
-      default: ''
-    },
-    placeholder: {
-      type: String,
-      default: ''
-    },
     nameField: {
+      type: String,
+      default: ''
+    },
+    rows: {
       type: String,
       default: ''
     },
     error: {
       type: String,
       default: ''
-    },
-    id: {
-      type: String,
-      default: ''
     }
   },
   model: {
-    prop: 'value'
+    prop: 'descr'
   },
   computed: {
     ...mapGetters([
@@ -68,8 +57,8 @@ export default {
   methods: {
     getError (nameField) {
       return this.errors[nameField]
-          ? this.errors[nameField][0]
-          : ''
+        ? this.errors[nameField][0]
+        : ''
     }
   }
 }

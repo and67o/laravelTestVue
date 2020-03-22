@@ -51,7 +51,7 @@ class LoginController extends Controller
             $response['error'] = 'Unauthorised';
             return response()->json(
                 $response,
-                401
+                JsonResponse::HTTP_UNAUTHORIZED
             );
         }
 
@@ -60,7 +60,7 @@ class LoginController extends Controller
         $response['result'] = $user->id;
         return response()->json(
             $response,
-            200
+            JsonResponse::HTTP_OK
         );
     }
 

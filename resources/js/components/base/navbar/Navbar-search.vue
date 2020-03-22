@@ -9,7 +9,7 @@
             v-model="searchValue"
         >
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-            Поиск
+            Search
         </button>
     </form>
 </template>

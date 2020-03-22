@@ -12,7 +12,11 @@ const actions = {
             resolve(result)
           }
         })
-        .catch(({ response: { data: { error } } }) => {
+        .catch(({
+          response: {
+            data: { error }
+          }
+        }) => {
           context.commit('setError', error)
           reject(error)
         })
@@ -27,7 +31,12 @@ const actions = {
           context.commit('resetAuth')
           resolve()
         })
-        .catch(({ response: { data: { error } } }) => {
+        .catch(({
+          response:
+                        {
+                          data: { error }
+                        }
+        }) => {
           context.commit('setError', error)
           reject(error)
         })
@@ -43,7 +52,9 @@ const actions = {
           context.commit('setAuth', { userId, token })
           resolve()
         })
-        .catch(({ response: { data: { error } } }) => {
+        .catch(({
+          response: { data: { error } }
+        }) => {
           context.commit('setError', error)
           reject(error)
         })
@@ -86,6 +97,19 @@ const actions = {
         })
         .catch(error => {
           reject(error)
+        })
+    })
+  },
+  createPost (context, postParam) {
+    return new Promise((resolve, reject) => {
+      ApiService
+        .post('/v1/post', postParam)
+        .then(response => {
+            resolve(response)
+        })
+        .catch(({ response: { data: { errors } } }) => {
+          context.commit('setError', errors)
+          reject(errors)
         })
     })
   }

@@ -5,6 +5,9 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 /**
  * Class Post
@@ -24,7 +27,6 @@ class Post extends Model
 
     protected $table = self::TABLE;
 
-    protected $primaryKey = 'post_id';
 
     protected $fillable = ['id', 'author_id', 'title', 'short_title', 'img', 'descr', 'created_at', 'updated_at'];
 
@@ -43,5 +45,91 @@ class Post extends Model
             'id',
             'author_id'
         );
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle(string $title) : void
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle() : string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setShortTitle(string $title) : void
+    {
+        $this->short_title = (Str::length($title) > 30)
+            ? Str::substr($title, 0, 30) . '...'
+            : $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortTitle() : string
+    {
+        return $this->short_title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescr() : string
+    {
+        return $this->descr;
+    }
+
+    /**
+     * @param $description
+     */
+    public function setDescr($description) : void
+    {
+        $this->descr = $description;
+    }
+
+    /**
+     *
+     */
+    public function setAuthorId() : void
+    {
+        $this->author_id = Auth::user()
+            ? Auth::user()->id
+            : 0;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorId() : string
+    {
+        return $this->author_id;
+    }
+
+    /**
+     * @param $fileImg
+     */
+    public function setImg($fileImg) : void
+    {
+        $path = Storage::putFile('posts', $fileImg);
+        $url = Storage::url($path);
+        $this->img = $url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImg() : string
+    {
+        return $this->img;
     }
 }

@@ -13,7 +13,7 @@
                     id="name"
                     placeholder="Name"
                     v-model="input.name"
-                    :error=getError().name
+                    error="name"
                 />
                 <Input
                     nameField="Email"
@@ -22,7 +22,7 @@
                     id="email"
                     placeholder="Email"
                     v-model="input.email"
-                    :error=getError().email
+                    error="email"
                 />
 
                 <Input
@@ -32,7 +32,7 @@
                     id="password"
                     placeholder="Password"
                     v-model="input.password"
-                    :error=getError().password
+                    error="password"
                 />
 
                 <Input
@@ -42,7 +42,7 @@
                     id="c_password"
                     placeholder="Password"
                     v-model="input.c_password"
-                    :error=getError().c_password
+                    passworderror="c_password"
                 />
 
                 <div class="control-group">

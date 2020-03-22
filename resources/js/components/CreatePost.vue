@@ -1,26 +1,25 @@
 <template>
     <form @submit.prevent="create()" enctype="multipart/form-data">
-        <h3>Создать пост</h3>
-        <div class="form-group">
-            <label>
-                <input
-                    name="title"
-                    type="text"
-                    class="form-control"
-                    v-model="title"
-                >
-            </label>
-        </div>
-        <div class="form-group">
-            <label>
-                <textarea
-                    name="descr"
-                    rows="10"
-                    class="form-control"
-                    v-model="descr"
-                ></textarea>
-            </label>
-        </div>
+        <h3>Create Post</h3>
+
+        <Input
+            nameField="Title"
+            target="title"
+            type="text"
+            id="title"
+            placeholder=""
+            v-model="title"
+            error="title"
+        />
+
+        <Textarea
+            nameField="Description"
+            name="descr"
+            rows="10"
+            v-model="descr"
+            error="descr"
+        />
+
         <div class="form-group">
             <input name="img" type="file" @change="fileChange">
         </div>
@@ -29,7 +28,13 @@
     </form>
 </template>
 <script>
+import Input from './base/tags/Input'
+import Textarea from './base/tags/Textarea'
 export default {
+  components: {
+    Input,
+    Textarea
+  },
   data () {
     return {
       title: '',
@@ -41,20 +46,27 @@ export default {
 
   },
   methods: {
+    getError () {
+      return this.$store.state.errors
+    },
     create () {
       this.form.append('title', this.title)
-      this.form.append('descr', this.title)
-      axios
-        .post('/v1/post', this.form)
+      this.form.append('descr', this.descr)
+      this.$store
+        .dispatch('createPost', this.form)
         .then(response => {
-          console.log(response)
+          const { data, status } = response
+          if (status === 200) {
+            this.$router.push({
+              name: 'post',
+              params: { id: data.id }
+            })
+          }
         })
-        .catch(response => {
-          console.log(response)
-        })
+        .catch(() => false)
     },
     fileChange (event) {
-        this.form.append('img', event.target.files[0])
+      this.form.append('img', event.target.files[0])
     }
   }
 }

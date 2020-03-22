@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Post;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use Illuminate\Http\Response;
 
 /**
  * Class PostController
@@ -51,15 +50,13 @@ class PostController extends Controller
                 ->orWhere('descr', 'like', '%' . $search . '%')
                 ->orWhere('users.name', 'like', '%' . $search . '%');
         }
-        return response()->json(
-            [
+        return response()->json([
                 'posts' => $posts->paginate(
                     self::COUNT_OF_PAGE,
                     ['*'],
                     'page',
                     (int) $request->input('page')
-                )
-            ]
+                )]
         );
     }
 
@@ -80,32 +77,26 @@ class PostController extends Controller
 
     /**
      * @param PostRequest $request
+     * @return JsonResponse
      */
     public function store(PostRequest $request)
     {
-        $Post = $this->_getFieldParams($request);
-        $res = $Post->save();
+        $title = $request->input('title');
+        $description = $request->input('descr');
 
-    }
-
-    /**
-     * @param PostRequest $request
-     * @return Post
-     */
-    private function _getFieldParams(PostRequest $request)
-    {
-        $this->Post->title = $request->title;
-        $this->Post->short_title = (Str::length($request->title) > 30)
-            ? Str::substr($request->title, 0, 30) . '...'
-            : $request->title;
-        $this->Post->descr = $request->descr;
-        $this->Post->author_id = Auth::user() ? Auth::user()->id : 0;
+        $this->Post->setTitle($title);
+        $this->Post->setShortTitle($title);
+        $this->Post->setDescr($description);
+        $this->Post->setAuthorId();
 
         if ($request->hasFile('img')) {
-            $path = Storage::putFile('posts', $request->file('img'));
-            $url = Storage::url($path);
-            $this->Post->img = $url;
+            $this->Post->setImg($request->file('img'));
         }
-        return $this->Post;
+        $result = $this->Post->save();
+        return response()->json([
+            'post_id' => $this->Post->id,
+            'result' => $result,
+            'errors' => []
+        ]);
     }
 }
