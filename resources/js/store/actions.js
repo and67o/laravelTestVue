@@ -44,10 +44,10 @@ const actions = {
           resolve()
         })
         .catch(({
-          response: { data: { error } }
+          response: { data: { errors } }
         }) => {
-          context.commit('setError', error)
-          reject(error)
+          context.commit('setError', errors)
+          reject(errors)
         })
     })
   },

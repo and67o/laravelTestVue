@@ -41,16 +41,4 @@ class RegisterController extends Controller
         );
     }
 
-    /**
-     * @return array
-     */
-    private function rules()
-    {
-        return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'password' => 'required',
-            'c_password' => 'required|same:password',
-        ];
-    }
 }

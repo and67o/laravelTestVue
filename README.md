@@ -9,3 +9,16 @@ http://127.0.0.1:8000/api/v1/register?name=oleg&email=oleg123@mail.ru&password=1
 http://127.0.0.1:8000/api/v1/posts?page=2
 
 php artisan passport:client --personal
+
+add .env
+
+composer install
+npm i
+npm run dev
+
+php artisan key:generate
+php artisan migrate:fresh --seed
+php artisan storage:link
+//php artisan passport:client --personal
+php artisan passport:install
+php artisan serve

@@ -9,7 +9,7 @@
             <PostCard
                 v-for="post in posts.data"
                 :post="post"
-                :key="post.post_id"
+                :key="post.id"
             />
         </div>
         <div v-else>

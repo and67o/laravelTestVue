@@ -43,6 +43,7 @@
                     placeholder="Password"
                     v-model="input.c_password"
                     passworderror="c_password"
+                    error="c_password"
                 />
 
                 <div class="control-group">

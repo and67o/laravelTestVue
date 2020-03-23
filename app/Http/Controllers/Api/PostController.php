@@ -40,7 +40,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $posts = Post::query()
-            ->leftJoin('users', 'author_id', '=', 'users.id')
+            ->leftjoin('users', 'posts.author_id', '=', 'users.id')
             ->orderBy('posts.created_at', 'desc');
 
         if ($request->input('search')) {
@@ -94,7 +94,7 @@ class PostController extends Controller
         }
         $result = $this->Post->save();
         return response()->json([
-            'post_id' => $this->Post->id,
+            'id' => $this->Post->id,
             'result' => $result,
             'errors' => []
         ]);
