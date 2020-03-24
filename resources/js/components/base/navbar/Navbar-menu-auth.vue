@@ -1,13 +1,13 @@
 <template>
     <ul class="navbar-nav ml-auto">
         <li v-if="!isAuth" class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'register' }">Зарегистрироваться</router-link>
+            <router-link class="nav-link" :to="{ name: 'register' }">Register</router-link>
         </li>
         <li v-if="!isAuth" class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'login' }">Войти</router-link>
+            <router-link class="nav-link" :to="{ name: 'login' }">Log in</router-link>
         </li>
         <li v-if="isAuth" class="nav-item">
-            <span class="nav-item" @click="logout()">Выйти</span>
+            <span class="nav-item" @click="logout()">Log out</span>
         </li>
     </ul>
 </template>

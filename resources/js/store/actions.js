@@ -51,21 +51,15 @@ const actions = {
         })
     })
   },
-  posts (context, {
-    page,
-    search
-    // eslint-disable-next-line no-undef
-  } = postsParam
-  ) {
+  posts (context, postsParam) {
     return new Promise((resolve, reject) => {
+      let { page, search } = postsParam
       search = search ? '&search=' + search : ''
       const url = '/v1/posts?page=' + page + search
       ApiService
         .get(url)
-        .then(({
-          data: { posts }
-          // eslint-disable-next-line no-undef
-        } = response) => {
+      // eslint-disable-next-line no-undef
+        .then(({ data: { posts } } = response) => {
           context.commit('setPosts', posts)
           resolve()
         })
@@ -79,10 +73,8 @@ const actions = {
       const url = '/v1/post/show/' + id
       ApiService
         .get(url)
-        .then(({
-          data: { post }
-          // eslint-disable-next-line no-undef
-        } = response) => {
+      // eslint-disable-next-line no-undef
+        .then(({ data: { post } } = response) => {
           context.commit('setPost', post)
           resolve()
         })

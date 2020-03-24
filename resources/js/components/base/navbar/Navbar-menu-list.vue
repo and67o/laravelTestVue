@@ -1,10 +1,10 @@
 <template>
     <ul class="col-6 navbar-nav mr-auto">
         <li class="nav-item active">
-            <router-link class="nav-link" :to="{ name: 'home' }">Главная</router-link>
+            <router-link class="nav-link" :to="{ name: 'home' }">Main</router-link>
         </li>
         <li v-if="isAuth" class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'postCreate' }">Создать пост</router-link>
+            <router-link class="nav-link" :to="{ name: 'postCreate' }">Create Post</router-link>
         </li>
     </ul>
 </template>

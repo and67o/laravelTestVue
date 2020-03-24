@@ -14,11 +14,11 @@
                         class="card-img"
                         style='background:url("../../img/default.jpeg");'
                     ></div>
-                    <div class="cart-descr">Описание: {{ post.descr }}</div>
-                    <div class="card-author">Автор: {{ post.name }}</div>
-                    <div class="card-date">Пост создан: {{ post.created_at }}</div>
+                    <div class="cart-descr">description: {{ post.descr }}</div>
+                    <div class="card-author">Author: {{ post.name }}</div>
+                    <div class="card-date">Post created: {{ post.created_at }}</div>
                     <div class="card-btn">
-                        <router-link class="btn btn-outline-primary" :to="{ name: 'home' }">На Главная</router-link>
+                        <router-link class="btn btn-outline-primary" :to="{ name: 'home' }">To Main</router-link>
                     </div>
                 </div>
             </div>

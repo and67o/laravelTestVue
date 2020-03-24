@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Post;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 /**
  * Class PostController
@@ -21,7 +19,7 @@ class PostController extends Controller
     /**
      * @var Post
      */
-    private $Post;
+    public $Post;
 
     /**
      * PostController constructor.

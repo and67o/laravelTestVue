@@ -1,24 +1,27 @@
-Test Login
-POST http://127.0.0.1:8000/api/v1/login
-email=[email]
-password=[password]
-Example http://127.0.0.1:8000/api/v1/login?email=oleg12@mail.ru&password=123456789
+#Testing project
+For improve my knowledge in Laravel and Vue.js in practise
 
-http://127.0.0.1:8000/api/v1/register?name=oleg&email=oleg123@mail.ru&password=123456789&c_password=123456789
+#Api
 
-http://127.0.0.1:8000/api/v1/posts?page=2
+| METHOD | URL |
+| ------ | ------ |
+| POST | /api/v1/login?email=oleg12@mail.ru&password=123456789 |
+| POST | /api/v1/register?name=oleg&email=oleg123@mail.ru&password=123456789&c_password=123456789 |
+| GET | /api/v1/posts?page=2 |
+| GET | /api/v1/post/show/1 |
 
-php artisan passport:client --personal
+#Installation
 
 add .env
 
-composer install
-npm i
-npm run dev
-
+```sh
+$ composer install
+$ npm i
+$ npm run dev
+```
+```sh
 php artisan key:generate
 php artisan migrate:fresh --seed
 php artisan storage:link
-//php artisan passport:client --personal
-php artisan passport:install
 php artisan serve
+```
